@@ -42,6 +42,10 @@ public class RecipeRepresentation {
 	// no setter!
 	
 	private String recipeName;
+	private Integer prepMinutes; 
+	private Integer cookMinutes;
+	private Integer servingSizeOunces;
+	private String instructions;
 	
 	// TODO: supporting up to 3 ingredients for now, could make this unlimited by parsing a CSV string or something if time allows
 	
@@ -65,6 +69,30 @@ public class RecipeRepresentation {
 	}
 	public void setRecipeName(String recipeName) {
 		this.recipeName = recipeName;
+	}
+	public Integer getPrepMinutes() {
+		return prepMinutes;
+	}
+	public void setPrepMinutes(Integer prepMinutes) {
+		this.prepMinutes = prepMinutes;
+	}
+	public Integer getCookMinutes() {
+		return cookMinutes;
+	}
+	public void setCookMinutes(Integer cookMinutes) {
+		this.cookMinutes = cookMinutes;
+	}
+	public Integer getServingSizeOunces() {
+		return servingSizeOunces;
+	}
+	public void setServingSizeOunces(Integer servingSizeOunces) {
+		this.servingSizeOunces = servingSizeOunces;
+	}
+	public String getInstructions() {
+		return instructions;
+	}
+	public void setInstructions(String instructions) {
+		this.instructions = instructions;
 	}
 	public String getIngredientName1() {
 		return ingredientName1;

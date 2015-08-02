@@ -25,7 +25,7 @@ public class RecipeController {
 	
 	
 	@RequestMapping(value="/{recipeUuid}", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<Object> getRecipe(@PathVariable("recipeUuid") String recipeUuid) {
+	public @ResponseBody ResponseEntity<Object> getRecipe( @PathVariable("recipeUuid") String recipeUuid ) {
 		ResponseEntity responseEntity = null;
 		Recipe recipe = null;
 		String errorMessage = null;
@@ -46,15 +46,6 @@ public class RecipeController {
 	
 	
 	// TODO: support stuff besides json
-	/*
-	@RequestMapping(value = "/create", method = RequestMethod.PUT)
-	public @ResponseBody Recipe createRecipe( @RequestBody RecipeRepresentation recipeRepresentation ) {
-		Recipe recipe = RecipeService.createRecipe(recipeRepresentation);
-		
-		return recipe;
-	}
-	*/
-	
 	@RequestMapping(value = "/create", method = RequestMethod.PUT)
 	public @ResponseBody ResponseEntity<Object> createRecipe( @RequestBody RecipeRepresentation recipeRepresentation ) {
 		ResponseEntity responseEntity = null;
@@ -77,5 +68,25 @@ public class RecipeController {
 	}
 	
 	
-	
+	// TODO: support stuff besides json
+	@RequestMapping(value = "/update/{recipeUuid}", method = RequestMethod.PUT)
+	public @ResponseBody ResponseEntity<Object> updateRecipe( @PathVariable("recipeUuid") String recipeUuid, @RequestBody RecipeRepresentation recipeRepresentation ) {
+		ResponseEntity responseEntity = null;
+		Recipe recipe = null;
+		String errorMessage = null;
+		
+		try {
+			recipe = RecipeService.updateRecipe( recipeUuid, recipeRepresentation );
+		}
+		catch(RecipeCreationException recipeCreationException) {
+			errorMessage = recipeCreationException.getMessage();
+		}
+		
+		if(recipe == null)
+			responseEntity = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST); // bad request.
+		else
+			responseEntity = new ResponseEntity<Recipe>(recipe, HttpStatus.OK);
+		
+		return responseEntity;
+	}
 }

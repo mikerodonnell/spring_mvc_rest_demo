@@ -1,6 +1,7 @@
 package com.demo.chicory.service;
 
 import java.util.Map;
+import java.util.UUID;
 
 import com.demo.chicory.exception.RecipeCreationException;
 import com.demo.chicory.exception.RecipeLookupException;
@@ -21,7 +22,7 @@ public class RecipeService {
 	 */
 	public static Recipe createRecipe( final RecipeRepresentation recipeRepresentation ) {
 		
-		String newRecipeName = recipeRepresentation.getRecipeName();
+		final String newRecipeName = recipeRepresentation.getRecipeName();
 		
 		if( newRecipeName==null || newRecipeName.isEmpty() )
 			throw new RecipeCreationException("Recipe name is required!");
@@ -29,14 +30,31 @@ public class RecipeService {
 		if( recipeNameExists(newRecipeName) )
 			throw new RecipeCreationException("Recipe name \"" + newRecipeName + "\" already exists. Recipe names must be unique!");
 		
-		Recipe recipe = new Recipe(); 
-		recipe.setRecipeName(recipeRepresentation.getRecipeName());
+		final Recipe recipe = new Recipe(UUID.randomUUID().toString(), recipeRepresentation.getRecipeName());
 		
-		addIngredients(recipe, recipeRepresentation);
+		extractOptionalRecipeData(recipe, recipeRepresentation);
+		extractIngredients(recipe, recipeRepresentation);
 		
 		return StubRecipeDao.saveRecipe(recipe); // TODO: cascade ingredients relationships ... not ingredients themselves...
 	}
 
+	/**
+	 * helper method to load basic recipe data from the given RecipeRepresentation;
+	 * 
+	 * @param recipe
+	 * @param recipeRepresentation
+	 */
+	private static void extractOptionalRecipeData( final Recipe recipe, final RecipeRepresentation recipeRepresentation ) {
+		recipe.setInstructions( recipeRepresentation.getInstructions() );
+		recipe.setPrepMinutes( recipeRepresentation.getPrepMinutes() );
+		recipe.setCookMinutes( recipeRepresentation.getCookMinutes() );
+	}
+
+	
+	private static void extractIngredients( final Recipe recipe, final RecipeRepresentation recipeRepresentation ) {
+		extractIngredients( recipe, recipeRepresentation, false );
+	}
+	
 	/**
 	 * Add the ingredients from the given Recipe representation (originating from the controller) to the to-be-persistent instance. This is done here rather than the
 	 * Recipe model because we support dynamically saving ingredients for future recipes, which requires DAO invocation at this step.
@@ -44,24 +62,27 @@ public class RecipeService {
 	 * @param recipe
 	 * @param recipeRepresentation
 	 */
-	private static void addIngredients( final Recipe recipe, final RecipeRepresentation recipeRepresentation) {
+	private static void extractIngredients( final Recipe recipe, final RecipeRepresentation recipeRepresentation, boolean isUpdate ) {
 		
 		Map<Ingredient, Amount> newIngredients = recipeRepresentation.getIngredients();
 		
-		if( newIngredients.isEmpty() )
-			throw new RecipeCreationException("Can't create a recipe with no ingredients specified!");
+		if( !isUpdate && newIngredients.isEmpty() ) // ensure that updates aren't affected here...an update doesn't have to add ingredients
+			throw new RecipeCreationException("Can't create a recipe without ingredients!");
 		
 		for( Ingredient ingredient : newIngredients.keySet() ) {
+			
 			if( !IngredientService.ingredientExists(ingredient) ) {
 				// this is a new ingredient to us, save it for future recipes
 				ingredient = IngredientService.createIngredient( ingredient.getName() ); // this triggers the persist
 			}
-			recipe.addIngredient( ingredient, newIngredients.get(ingredient) ); // add the ingredident regardless
+			
+			// now add the ingredident regardless. this overwrites in Update cases, that's the desired behavior.
+			recipe.addIngredient( ingredient, newIngredients.get(ingredient) );
 		}
 		
 	}
 
-	public static Recipe getRecipe(String recipeUuid) {
+	public static Recipe getRecipe( final String recipeUuid ) {
 		Recipe recipe = StubRecipeDao.getRecipeByUuid(recipeUuid);
 		if( recipe == null)
 			throw new RecipeLookupException("recipe \"" + recipeUuid + "\" does not exist!");
@@ -71,5 +92,23 @@ public class RecipeService {
 	
 	private static boolean recipeNameExists( final String newRecipeName ) {
 		return ( StubRecipeDao.getRecipeByName(newRecipeName) != null);
+	}
+
+	
+	/**
+	 * Update the recipe matching the given UUID with any non-null values found in the given recipeRepresentation.
+	 * 
+	 * @param recipeUuid
+	 * @param recipeRepresentation
+	 * @return
+	 */
+	public static Recipe updateRecipe( final String recipeUuid, final RecipeRepresentation recipeRepresentation ) {
+		// TODO: currently no support for wiping out existing ingredients ... just additive right now
+		final Recipe recipe = getRecipe( recipeUuid ); // RecipeLookupException thrown here if not exists
+		
+		extractOptionalRecipeData(recipe, recipeRepresentation);
+		extractIngredients(recipe, recipeRepresentation, true);
+		
+		return recipe;
 	}
 }
