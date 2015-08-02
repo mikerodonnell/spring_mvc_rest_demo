@@ -1,11 +1,14 @@
 package com.demo.chicory.model;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+// import org.codehaus.jackson.annotate.JsonProperty;
 
 public class Ingredient {
 
-	@JsonProperty("name") // TODO: why is this class serializing with the class reference!?
+	// @JsonProperty("name") // TODO: why is this class serializing with the class reference!?
 	private String name;
+	
+	private String priceUnit;
+	private Integer priceDollars; // US dollars per priceUnit
 
 	public Ingredient() {}
 	
@@ -19,6 +22,23 @@ public class Ingredient {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+
+	public String getPriceUnit() {
+		return priceUnit;
+	}
+
+	public void setPriceUnit(String priceUnit) {
+		this.priceUnit = priceUnit;
+	}
+
+	public Integer getPriceDollars() {
+		return priceDollars;
+	}
+
+	public void setPriceDollars(Integer priceCost) {
+		this.priceDollars = priceCost;
 	}
 
 	@Override

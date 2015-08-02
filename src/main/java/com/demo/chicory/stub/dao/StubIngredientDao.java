@@ -14,6 +14,15 @@ public class StubIngredientDao {
 	
 	public static final Set<Ingredient> ALL_INGREDIENTS = new HashSet<Ingredient>();
 	static {
+		HAM.setPriceUnit("lb");
+		HAM.setPriceDollars(6);
+		
+		EGGS.setPriceUnit("dozen");
+		EGGS.setPriceDollars(2);
+		
+		SUGAR.setPriceUnit("lb");
+		SUGAR.setPriceDollars(4);
+		
 		ALL_INGREDIENTS.add(HAM);
 		ALL_INGREDIENTS.add(EGGS);
 		ALL_INGREDIENTS.add(SUGAR);

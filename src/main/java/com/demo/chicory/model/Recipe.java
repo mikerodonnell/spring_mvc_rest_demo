@@ -82,7 +82,23 @@ public class Recipe {
 	public void addIngredient(final Ingredient ingredient, final Amount amount) {
 		this.ingredients.put( ingredient, amount );
 	}
-
+	
+	public Integer getCostInDollars() {
+		Integer costInDollars = 0;
+		
+		for( Ingredient ingredient : ingredients.keySet() ) {
+			Integer unitPrice = ingredient.getPriceDollars();
+			Amount amountNeeded = ingredients.get(ingredient);
+			
+			if( amountNeeded.getUnit().equalsIgnoreCase(ingredient.getPriceUnit()) )
+				costInDollars += ( unitPrice * amountNeeded.getQuanity() );
+			// else we don't know what the price is per this unit right now ... see TODO in Ingredient model
+		}
+		
+		return costInDollars;
+	}
+	// no setter!
+	
 	@Override
 	public String toString() {
 		return "{ uuid:" + uuid + "}";

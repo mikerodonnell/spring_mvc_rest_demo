@@ -19,8 +19,8 @@ public class StubRecipeDao {
 		RECIPE_1.setCookMinutes(6);
 		RECIPE_1.setInstructions("fry green eggs. fry ham.");
 		RECIPE_1.setServingSizeOunces(8);
-		RECIPE_1.addIngredient( StubIngredientDao.EGGS, new Amount(3, "unit") );
-		RECIPE_1.addIngredient( StubIngredientDao.HAM, new Amount(1, "lb") );
+		RECIPE_1.addIngredient( StubIngredientDao.EGGS, new Amount(1, "dozen") );
+		RECIPE_1.addIngredient( StubIngredientDao.HAM, new Amount(2, "lb") );
 		
 		RECIPE_2.setUuid("fbe02fec-697d-4a94-9a57-cc77b0de5a90");
 		RECIPE_2.setPrepMinutes(10);
