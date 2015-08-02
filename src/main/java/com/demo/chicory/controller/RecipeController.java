@@ -1,5 +1,7 @@
 package com.demo.chicory.controller;
 
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -40,6 +42,28 @@ public class RecipeController {
 			responseEntity = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST); // bad request.
 		else
 			responseEntity = new ResponseEntity<Recipe>(recipe, HttpStatus.OK);
+		
+		return responseEntity;
+	}
+	
+	
+	// TODO: simple search by single ingredient name for now. add support for more fields and such.
+	@RequestMapping(value="/search/{ingredientName}", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<Object> searchRecipesByIngredientName( @PathVariable("ingredientName") String ingredientName ) {
+		ResponseEntity responseEntity = null;
+		Set<Recipe> recipes = null;
+		String errorMessage = null;
+		try {
+			recipes = RecipeService.searchRecipesByIngredientName(ingredientName);
+		}
+		catch( RecipeLookupException recipeLookupException ) {
+			errorMessage = recipeLookupException.getMessage();
+			// that's all we have to do here...recipe will remain null, so error HTTP response code will be used
+		}
+		if(recipes == null) // null means something bad happened. empty set is fine, means no results
+			responseEntity = new ResponseEntity<String>(errorMessage, HttpStatus.BAD_REQUEST); // bad request.
+		else
+			responseEntity = new ResponseEntity< Set<Recipe> >(recipes, HttpStatus.OK);
 		
 		return responseEntity;
 	}

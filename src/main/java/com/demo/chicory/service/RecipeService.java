@@ -1,6 +1,7 @@
 package com.demo.chicory.service;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import com.demo.chicory.exception.RecipeCreationException;
@@ -94,6 +95,10 @@ public class RecipeService {
 		return ( StubRecipeDao.getRecipeByName(newRecipeName) != null);
 	}
 
+	public static Set<Recipe> searchRecipesByIngredientName( final String ingredientName ) {
+		return StubRecipeDao.searchRecipesByIngredientName(ingredientName) ;
+	}
+	
 	
 	/**
 	 * Update the recipe matching the given UUID with any non-null values found in the given recipeRepresentation.

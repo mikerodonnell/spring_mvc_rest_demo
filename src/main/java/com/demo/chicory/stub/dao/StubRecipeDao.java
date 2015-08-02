@@ -3,6 +3,8 @@ package com.demo.chicory.stub.dao;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.demo.chicory.model.Amount;
+import com.demo.chicory.model.Ingredient;
 import com.demo.chicory.model.Recipe;
 
 public class StubRecipeDao {
@@ -17,12 +19,15 @@ public class StubRecipeDao {
 		RECIPE_1.setCookMinutes(6);
 		RECIPE_1.setInstructions("fry green eggs. fry ham.");
 		RECIPE_1.setServingSizeOunces(8);
+		RECIPE_1.addIngredient( StubIngredientDao.EGGS, new Amount(3, "unit") );
+		RECIPE_1.addIngredient( StubIngredientDao.HAM, new Amount(1, "lb") );
 		
 		RECIPE_2.setUuid("fbe02fec-697d-4a94-9a57-cc77b0de5a90");
 		RECIPE_2.setPrepMinutes(10);
 		RECIPE_2.setCookMinutes(30);
 		RECIPE_2.setInstructions("mash bananas. bake.");
 		RECIPE_2.setServingSizeOunces(6);
+		RECIPE_2.addIngredient( StubIngredientDao.SUGAR, new Amount(1, "lb") );
 		
 		RECIPE_3.setUuid("4acdfafb-32b5-404c-a658-10a1619f56e6");
 		RECIPE_3.setPrepMinutes(50);
@@ -65,5 +70,23 @@ public class StubRecipeDao {
 	public static Recipe saveRecipe( final Recipe newRecipe ) {
 		// just a stub ... real implementation would persist here
 		return newRecipe;
+	}
+	
+	
+	public static Set<Recipe> searchRecipesByIngredientName( final String ingredientName ) {
+		Set<Recipe> results = new HashSet<Recipe>();
+		
+		if( ingredientName!=null && !ingredientName.isEmpty() ) {
+			for( Recipe recipe : ALL_RECIPES) {
+				for( Ingredient ingredient : recipe.getIngredients().keySet() ) {
+					if( ingredientName.toLowerCase().contains(ingredient.getName()) ) { // case sensitive for performance! TODO: do toLowerCase() on save!
+						results.add( recipe );
+						break; // don't keep looping over the rest of the ingredients.
+					}
+				}
+			}
+		}
+		
+		return results;
 	}
 }
