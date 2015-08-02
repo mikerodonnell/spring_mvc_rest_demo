@@ -1,10 +1,7 @@
 package com.demo.chicory.model;
 
-// import org.codehaus.jackson.annotate.JsonProperty;
-
 public class Ingredient {
 
-	// @JsonProperty("name") // TODO: why is this class serializing with the class reference!?
 	private String name;
 	
 	private String priceUnit;
