@@ -1,12 +1,23 @@
 package com.demo.chicory.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 public class Ingredient {
 
 	private String name;
 	
+	@Deprecated
 	private String priceUnit;
+	
+	@Deprecated
 	private Integer priceDollars; // US dollars per priceUnit
 
+	@JsonIgnore
+	private Set<Price> prices = new HashSet<Price>(); // TODO: finish implementing this...
+	
 	public Ingredient() {}
 	
 	public Ingredient(String name) {
