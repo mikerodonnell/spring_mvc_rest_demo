@@ -3,8 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.demo</groupId>
-	<artifactId>chicory</artifactId>
-	<name>chicory_test</name>
+	<artifactId>spring_mvc_rest_demo</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -163,6 +162,6 @@
             </plugin>
         </plugins>
         
-        <finalName>chicory</finalName>
+        <finalName>spring_mvc_rest_demo</finalName>
     </build>
 </project>

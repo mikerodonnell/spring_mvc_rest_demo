@@ -1,11 +1,11 @@
-package com.demo.chicory.model;
+package com.demo.recipe.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Recipe {
 
-	/** A unique identifer for this Recipe. ex: "b88240a2-7252-4e7c-9e74-78bb31c1fe27" */
+	/** A unique identifier for this Recipe. ex: "b88240a2-7252-4e7c-9e74-78bb31c1fe27" */
 	private String uuid;
 	
 	/** A descriptive name for this Recipe. ex: "green eggs and ham" */

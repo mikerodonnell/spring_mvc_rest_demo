@@ -1,9 +1,9 @@
-package com.demo.chicory.stub.dao;
+package com.demo.recipe.stub.dao;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.demo.chicory.model.Ingredient;
+import com.demo.recipe.model.Ingredient;
 
 public class StubIngredientDao {
 	

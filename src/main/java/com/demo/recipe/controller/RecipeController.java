@@ -1,4 +1,4 @@
-package com.demo.chicory.controller;
+package com.demo.recipe.controller;
 
 import java.util.Set;
 
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.demo.chicory.exception.RecipeCreationException;
-import com.demo.chicory.exception.RecipeLookupException;
-import com.demo.chicory.model.Recipe;
-import com.demo.chicory.serialization.RecipeRepresentation;
-import com.demo.chicory.service.RecipeService;
+import com.demo.recipe.exception.RecipeCreationException;
+import com.demo.recipe.exception.RecipeLookupException;
+import com.demo.recipe.model.Recipe;
+import com.demo.recipe.serialization.RecipeRepresentation;
+import com.demo.recipe.service.RecipeService;
 
 @Controller
 @RequestMapping("/recipe/")

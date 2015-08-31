@@ -1,13 +1,13 @@
-package com.demo.chicory.serialization;
+package com.demo.recipe.serialization;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-import com.demo.chicory.model.Amount;
-import com.demo.chicory.model.Ingredient;
-import com.demo.chicory.model.Recipe;
+import com.demo.recipe.model.Amount;
+import com.demo.recipe.model.Ingredient;
+import com.demo.recipe.model.Recipe;
 
 /**
  * recipe representation helper object for incoming requests to make a new Recipe.

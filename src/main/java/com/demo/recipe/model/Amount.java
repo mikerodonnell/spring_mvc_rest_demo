@@ -1,4 +1,4 @@
-package com.demo.chicory.model;
+package com.demo.recipe.model;
 
 public class Amount {
 

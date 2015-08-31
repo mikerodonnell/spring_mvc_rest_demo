@@ -1,16 +1,16 @@
-package com.demo.chicory.service;
+package com.demo.recipe.service;
 
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import com.demo.chicory.exception.RecipeCreationException;
-import com.demo.chicory.exception.RecipeLookupException;
-import com.demo.chicory.model.Amount;
-import com.demo.chicory.model.Ingredient;
-import com.demo.chicory.model.Recipe;
-import com.demo.chicory.serialization.RecipeRepresentation;
-import com.demo.chicory.stub.dao.StubRecipeDao;
+import com.demo.recipe.exception.RecipeCreationException;
+import com.demo.recipe.exception.RecipeLookupException;
+import com.demo.recipe.model.Amount;
+import com.demo.recipe.model.Ingredient;
+import com.demo.recipe.model.Recipe;
+import com.demo.recipe.serialization.RecipeRepresentation;
+import com.demo.recipe.stub.dao.StubRecipeDao;
 
 public class RecipeService {
 

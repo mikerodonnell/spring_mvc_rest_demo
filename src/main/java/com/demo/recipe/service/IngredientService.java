@@ -1,7 +1,7 @@
-package com.demo.chicory.service;
+package com.demo.recipe.service;
 
-import com.demo.chicory.model.Ingredient;
-import com.demo.chicory.stub.dao.StubIngredientDao;
+import com.demo.recipe.model.Ingredient;
+import com.demo.recipe.stub.dao.StubIngredientDao;
 
 public class IngredientService {
 

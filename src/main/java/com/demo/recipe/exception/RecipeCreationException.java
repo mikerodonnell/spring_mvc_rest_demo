@@ -1,4 +1,4 @@
-package com.demo.chicory.exception;
+package com.demo.recipe.exception;
 
 public class RecipeCreationException extends RuntimeException {
 
