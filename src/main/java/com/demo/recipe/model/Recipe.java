@@ -116,4 +116,26 @@ public class Recipe {
 	public String toString() {
 		return "{ uuid:" + uuid + "}";
 	}
+
+	@Override
+	public int hashCode() {
+		return uuid.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Recipe))
+			return false;
+		Recipe other = (Recipe) obj;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
+			return false;
+		return true;
+	}
 }
