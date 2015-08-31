@@ -2,8 +2,11 @@ package com.demo.chicory.model;
 
 public class Amount {
 
-	private Integer quanity; // ex: 3
-	private String unit; // ex: "spoonfulls"  // TODO: emumerate this!
+	/** The number of units comprising an amount of an ingredient. ex: 3 */
+	private Integer quanity;
+	
+	/** The unit of measurement comprising an amount of an ingredient. ex: "spoonfulls" */
+	private String unit;
 	
 	
 	public Amount() {}

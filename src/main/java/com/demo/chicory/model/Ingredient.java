@@ -1,22 +1,18 @@
 package com.demo.chicory.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 public class Ingredient {
 
+	/** The specific distinguishable name of the ingredient: ex: "canned corn" */
 	private String name;
 	
-	@Deprecated
+	/** The unit of measurement comprising an amount of an ingredient. ex: "spoonfulls" 
+	 * @see Amount#getUnit()
+	 * @todo make this an enum that Ingredient and Amount use
+	 */
 	private String priceUnit;
 	
-	@Deprecated
+	/** The price in US Dollars for one unit of this ingredient */
 	private Integer priceDollars; // US dollars per priceUnit
-
-	@JsonIgnore
-	private Set<Price> prices = new HashSet<Price>(); // TODO: finish implementing this...
 	
 	public Ingredient() {}
 	
@@ -31,7 +27,6 @@ public class Ingredient {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getPriceUnit() {
 		return priceUnit;

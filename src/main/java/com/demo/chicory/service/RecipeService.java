@@ -108,7 +108,7 @@ public class RecipeService {
 	 * @return
 	 */
 	public static Recipe updateRecipe( final String recipeUuid, final RecipeRepresentation recipeRepresentation ) {
-		// TODO: currently no support for wiping out existing ingredients ... just additive right now
+		// no support for wiping out existing ingredients ... just additive.
 		final Recipe recipe = getRecipe( recipeUuid ); // RecipeLookupException thrown here if not exists
 		
 		extractOptionalRecipeData(recipe, recipeRepresentation);

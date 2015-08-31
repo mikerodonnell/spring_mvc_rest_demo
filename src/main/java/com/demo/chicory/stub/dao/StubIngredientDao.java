@@ -4,10 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.demo.chicory.model.Ingredient;
-import com.demo.chicory.model.Price;
 
 public class StubIngredientDao {
-
 	
 	public static final Ingredient HAM = new Ingredient("ham");
 	public static final Ingredient EGGS = new Ingredient("eggs");
@@ -15,11 +13,6 @@ public class StubIngredientDao {
 	
 	public static final Set<Ingredient> ALL_INGREDIENTS = new HashSet<Ingredient>();
 	static {
-		Set<Price> hamPrices = new HashSet<Price>();
-		hamPrices.add( new Price("lb", 6) );
-		hamPrices.add( new Price("oz", 1) );
-		// TODO: implement ... out of time
-		
 		HAM.setPriceUnit("lb");
 		HAM.setPriceDollars(6);
 		
@@ -32,7 +25,6 @@ public class StubIngredientDao {
 		ALL_INGREDIENTS.add(HAM);
 		ALL_INGREDIENTS.add(EGGS);
 		ALL_INGREDIENTS.add(SUGAR);
-		// TODO: unmodifiableSet
 	}
 	
 	

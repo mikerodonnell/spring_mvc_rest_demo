@@ -17,9 +17,14 @@ import com.demo.chicory.model.Recipe;
  */
 public class RecipeRepresentation {
 
+	/**
+	 * Flag for whether {@link #ingredients} has been populated from the flattened values or not.
+	 * @see #instructions
+	 */
 	@JsonIgnore
 	private boolean isInitialized = false;
 	
+	/** All ingredients to prepare this Recipe, represented as an Amount value for each Ingredient key. */
 	@JsonIgnore
 	private Map<Ingredient, Amount> ingredients = new HashMap<Ingredient, Amount>();
 	
@@ -47,7 +52,7 @@ public class RecipeRepresentation {
 	private Integer servingSizeOunces;
 	private String instructions;
 	
-	// TODO: supporting up to 3 ingredients for now, could make this unlimited by parsing a CSV string or something if time allows
+	// supporting up to 3 ingredients for now, could make this unlimited by parsing a CSV string or something.
 	
 	private String ingredientName1; // ex: "ham"
 	private String ingredientName2;
@@ -59,7 +64,7 @@ public class RecipeRepresentation {
 	private String amountUnit4;
 	private String amountUnit5;
 	
-	private Integer amount1; // ex: 4. TODO: support weird quantites ... "dozen", etc
+	private Integer amount1; // ex: 4
 	private Integer amount2;
 	private Integer amount3;
 	private Integer amount4;

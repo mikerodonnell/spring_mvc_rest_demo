@@ -41,7 +41,6 @@ public class StubRecipeDao {
 		ALL_RECIPES.add(RECIPE_1);
 		ALL_RECIPES.add(RECIPE_2);
 		ALL_RECIPES.add(RECIPE_3);
-		// TODO: unmodifiableSet
 	}
 	
 	

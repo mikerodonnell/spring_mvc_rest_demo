@@ -5,12 +5,25 @@ import java.util.Map;
 
 public class Recipe {
 
+	/** A unique identifer for this Recipe. ex: "b88240a2-7252-4e7c-9e74-78bb31c1fe27" */
 	private String uuid;
+	
+	/** A descriptive name for this Recipe. ex: "green eggs and ham" */
 	private String recipeName;
-	private Integer prepMinutes; // TODO: abstract out Time model to represent 3 minutes, or 5 hours, etc. 
+	
+	/** The number of minutes required to prepare ingredients for this Recipe, if any. ex: 20 */
+	private Integer prepMinutes;
+	
+	/** The number of minutes required to cook this Recipe, if any. ex: 30 */
 	private Integer cookMinutes;
-	private Integer servingSizeOunces; // TODO: abstract out ServingSize model for 2 grams, 3 ounces, 1 jar, etc.
-	private String instructions; // TODO: this would be rich formatted data of some sort...or at least a List of steps
+	
+	/** The number of imperial ounces that comprise a per-person serving of this Recipe. ex: 6 */
+	private Integer servingSizeOunces;
+	
+	/** The step-by-step instructions to prepare this Recipe. ex: "Dye eggs green. Cook eggs. Cook ham." */
+	private String instructions;
+	
+	/** All ingredients to prepare this Recipe, represented as an Amount value for each Ingredient key. */
 	private Map<Ingredient, Amount> ingredients = new HashMap<Ingredient, Amount>();
 
 	// TODO: take away default constructor once verifying that's ok with DB saving
@@ -92,7 +105,7 @@ public class Recipe {
 			
 			if( amountNeeded.getUnit().equalsIgnoreCase(ingredient.getPriceUnit()) )
 				costInDollars += ( unitPrice * amountNeeded.getQuanity() );
-			// else we don't know what the price is per this unit right now ... see TODO in Ingredient model
+			// else we don't know what the price is per this unit.
 		}
 		
 		return costInDollars;
