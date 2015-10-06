@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import org.apache.log4j.Logger;
+
 import com.demo.recipe.exception.RecipeCreationException;
 import com.demo.recipe.exception.RecipeLookupException;
 import com.demo.recipe.model.Amount;
@@ -14,6 +16,8 @@ import com.demo.recipe.stub.dao.StubRecipeDao;
 
 public class RecipeService {
 
+	private static final Logger logger = Logger.getLogger(RecipeService.class);
+	
 	/**
 	 * Create a new Recipe based on a given incomplete Recipe representation from the Controller. This is the top level for handling things like assigning unique identifiers,
 	 * checking what ingredients already exist, lookup/save with database, and any other work we don't want the controller involved in.
@@ -36,6 +40,7 @@ public class RecipeService {
 		extractOptionalRecipeData(recipe, recipeRepresentation);
 		extractIngredients(recipe, recipeRepresentation);
 		
+		logger.info("saving new recipe now: " + recipe);
 		return StubRecipeDao.saveRecipe(recipe); // TODO: cascade ingredients relationships ... not ingredients themselves...
 	}
 
@@ -114,6 +119,7 @@ public class RecipeService {
 		extractOptionalRecipeData(recipe, recipeRepresentation);
 		extractIngredients(recipe, recipeRepresentation, true);
 		
+		logger.info("saving updates to recipe now: " + recipe);
 		return recipe;
 	}
 }

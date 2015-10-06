@@ -2,8 +2,7 @@ package com.demo.recipe.controller;
 
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,10 +20,7 @@ import com.demo.recipe.service.RecipeService;
 
 @Controller
 @RequestMapping("/recipe/")
-public class RecipeController {
-
-	private static final Logger logger = LoggerFactory.getLogger(RecipeController.class);
-	
+public class RecipeController {	
 	
 	/**
 	 * Retrieve a single Recipe by UUID. 
@@ -70,7 +66,6 @@ public class RecipeController {
 	}
 	
 	
-	// TODO: support stuff besides json
 	/**
 	 * Create a new recipe from the given RecipeRepresentation.
 	 * 
@@ -99,7 +94,6 @@ public class RecipeController {
 	}
 	
 	
-	// TODO: support stuff besides json
 	/**
 	 * Update an extant recipe based on the given RecipeRepresentation.
 	 * 

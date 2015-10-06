@@ -114,7 +114,7 @@ public class Recipe {
 	
 	@Override
 	public String toString() {
-		return "{ uuid:" + uuid + "}";
+		return "{ recipeName: " + recipeName + ", uuid: " + uuid + "}";
 	}
 
 	@Override
