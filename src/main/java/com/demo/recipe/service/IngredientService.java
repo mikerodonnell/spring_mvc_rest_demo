@@ -1,21 +1,28 @@
 package com.demo.recipe.service;
 
-import com.demo.recipe.model.Ingredient;
-import com.demo.recipe.stub.dao.StubIngredientDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.demo.recipe.dao.IngredientDao;
+import com.demo.recipe.model.Ingredient;
+
+@Service
 public class IngredientService {
 
+	@Autowired
+	private IngredientDao ingredientDao;
+	
 	/**
 	 * Determine if the given Ingredient already exists in the datastore or not.
 	 * 
 	 * @param ingredient
 	 * @return true if the given Ingredient exists in the datastore; false otherwise, including null.
 	 */
-	public static boolean ingredientExists( final Ingredient ingredient ) {
+	public boolean ingredientExists( final Ingredient ingredient ) {
 		if(ingredient==null)
 			return false;
 		
-		return ( StubIngredientDao.getIngredient(ingredient.getName()) != null);
+		return ( ingredientDao.getIngredient(ingredient.getName()) != null);
 	}
 
 	/**
@@ -24,8 +31,8 @@ public class IngredientService {
 	 * @param name
 	 * @return the newly persisted Ingredient.
 	 */
-	public static Ingredient createIngredient( final String name ) {
-		return StubIngredientDao.saveIngredient( new Ingredient(name) );
+	public Ingredient createIngredient( final String name ) {
+		return ingredientDao.saveIngredient( new Ingredient(name) );
 	}
 
 }

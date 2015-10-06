@@ -1,13 +1,17 @@
-package com.demo.recipe.stub.dao;
+package com.demo.recipe.dao.stub;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
+import com.demo.recipe.dao.RecipeDao;
 import com.demo.recipe.model.Amount;
 import com.demo.recipe.model.Ingredient;
 import com.demo.recipe.model.Recipe;
 
-public class StubRecipeDao {
+@Repository
+public class StubRecipeDao implements RecipeDao {
 
 	public static final Recipe RECIPE_1 = new Recipe("green eggs and ham");
 	public static final Recipe RECIPE_2 = new Recipe("banana bread");
@@ -43,12 +47,13 @@ public class StubRecipeDao {
 		ALL_RECIPES.add(RECIPE_3);
 	}
 	
-	
-	public static Set<Recipe> getRecipes() {
+	@Override
+	public Set<Recipe> getRecipes() {
 		return ALL_RECIPES;
 	}
 	
-	public static Recipe getRecipeByUuid( final String uuid ) {
+	@Override
+	public Recipe getRecipeByUuid( final String uuid ) {
 		for( Recipe recipe : ALL_RECIPES) {
 			if( recipe.getUuid().equals(uuid))
 				return recipe;
@@ -57,7 +62,8 @@ public class StubRecipeDao {
 		return null;
 	}
 	
-	public static Recipe getRecipeByName( final String recipeName ) {
+	@Override
+	public Recipe getRecipeByName( final String recipeName ) {
 		for( Recipe recipe : ALL_RECIPES) {
 			if( recipe.getRecipeName().equals(recipeName))
 				return recipe;
@@ -66,13 +72,14 @@ public class StubRecipeDao {
 		return null;
 	}
 	
-	public static Recipe saveRecipe( final Recipe newRecipe ) {
+	@Override
+	public Recipe saveRecipe( final Recipe newRecipe ) {
 		// just a stub ... real implementation would persist here
 		return newRecipe;
 	}
 	
-	
-	public static Set<Recipe> searchRecipesByIngredientName( final String ingredientName ) {
+	@Override
+	public Set<Recipe> searchRecipesByIngredientName( final String ingredientName ) {
 		Set<Recipe> results = new HashSet<Recipe>();
 		
 		if( ingredientName!=null && !ingredientName.isEmpty() ) {

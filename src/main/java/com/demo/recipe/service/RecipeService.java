@@ -5,17 +5,26 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.demo.recipe.dao.RecipeDao;
 import com.demo.recipe.exception.RecipeCreationException;
 import com.demo.recipe.exception.RecipeLookupException;
 import com.demo.recipe.model.Amount;
 import com.demo.recipe.model.Ingredient;
 import com.demo.recipe.model.Recipe;
 import com.demo.recipe.serialization.RecipeRepresentation;
-import com.demo.recipe.stub.dao.StubRecipeDao;
 
+@Service
 public class RecipeService {
 
+	@Autowired
+	private IngredientService ingredientService;
+	
+	@Autowired
+	private RecipeDao recipeDao;
+	
 	private static final Logger logger = Logger.getLogger(RecipeService.class);
 	
 	/**
@@ -25,7 +34,7 @@ public class RecipeService {
 	 * @param recipeRepresentation
 	 * @return
 	 */
-	public static Recipe createRecipe( final RecipeRepresentation recipeRepresentation ) {
+	public Recipe createRecipe( final RecipeRepresentation recipeRepresentation ) {
 		
 		final String newRecipeName = recipeRepresentation.getRecipeName();
 		
@@ -41,7 +50,7 @@ public class RecipeService {
 		extractIngredients(recipe, recipeRepresentation);
 		
 		logger.info("saving new recipe now: " + recipe);
-		return StubRecipeDao.saveRecipe(recipe); // TODO: cascade ingredients relationships ... not ingredients themselves...
+		return recipeDao.saveRecipe(recipe); // TODO: cascade ingredients relationships ... not ingredients themselves...
 	}
 
 	/**
@@ -57,7 +66,7 @@ public class RecipeService {
 	}
 
 	
-	private static void extractIngredients( final Recipe recipe, final RecipeRepresentation recipeRepresentation ) {
+	private void extractIngredients( final Recipe recipe, final RecipeRepresentation recipeRepresentation ) {
 		extractIngredients( recipe, recipeRepresentation, false );
 	}
 	
@@ -68,7 +77,7 @@ public class RecipeService {
 	 * @param recipe
 	 * @param recipeRepresentation
 	 */
-	private static void extractIngredients( final Recipe recipe, final RecipeRepresentation recipeRepresentation, boolean isUpdate ) {
+	private void extractIngredients( final Recipe recipe, final RecipeRepresentation recipeRepresentation, boolean isUpdate ) {
 		
 		Map<Ingredient, Amount> newIngredients = recipeRepresentation.getIngredients();
 		
@@ -77,9 +86,9 @@ public class RecipeService {
 		
 		for( Ingredient ingredient : newIngredients.keySet() ) {
 			
-			if( !IngredientService.ingredientExists(ingredient) ) {
+			if( !ingredientService.ingredientExists(ingredient) ) {
 				// this is a new ingredient to us, save it for future recipes
-				ingredient = IngredientService.createIngredient( ingredient.getName() ); // this triggers the persist
+				ingredient = ingredientService.createIngredient( ingredient.getName() ); // this triggers the persist
 			}
 			
 			// now add the ingredident regardless. this overwrites in Update cases, that's the desired behavior.
@@ -88,20 +97,20 @@ public class RecipeService {
 		
 	}
 
-	public static Recipe getRecipe( final String recipeUuid ) {
-		Recipe recipe = StubRecipeDao.getRecipeByUuid(recipeUuid);
+	public Recipe getRecipe( final String recipeUuid ) {
+		Recipe recipe = recipeDao.getRecipeByUuid(recipeUuid);
 		if( recipe == null)
 			throw new RecipeLookupException("recipe \"" + recipeUuid + "\" does not exist!");
 		
 		return recipe;
 	}
 	
-	private static boolean recipeNameExists( final String newRecipeName ) {
-		return ( StubRecipeDao.getRecipeByName(newRecipeName) != null);
+	private boolean recipeNameExists( final String newRecipeName ) {
+		return ( recipeDao.getRecipeByName(newRecipeName) != null);
 	}
 
-	public static Set<Recipe> searchRecipesByIngredientName( final String ingredientName ) {
-		return StubRecipeDao.searchRecipesByIngredientName(ingredientName) ;
+	public Set<Recipe> searchRecipesByIngredientName( final String ingredientName ) {
+		return recipeDao.searchRecipesByIngredientName(ingredientName) ;
 	}
 	
 	
@@ -112,7 +121,7 @@ public class RecipeService {
 	 * @param recipeRepresentation
 	 * @return
 	 */
-	public static Recipe updateRecipe( final String recipeUuid, final RecipeRepresentation recipeRepresentation ) {
+	public Recipe updateRecipe( final String recipeUuid, final RecipeRepresentation recipeRepresentation ) {
 		// no support for wiping out existing ingredients ... just additive.
 		final Recipe recipe = getRecipe( recipeUuid ); // RecipeLookupException thrown here if not exists
 		

@@ -8,14 +8,14 @@
 	<version>1.0-SNAPSHOT</version>
 
 	<properties>
-		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
-		<jackson.version>1.9.10</jackson.version>
+		<org.springframework-version>4.2.1.RELEASE</org.springframework-version>
+		<jackson.version>2.6.2</jackson.version>
 		<junit.version>4.12</junit.version>
 		<log4j.version>1.2.17</log4j.version>
 		<rest.assured.version>2.5.0</rest.assured.version>
 
 		<!-- rest-assured on jetty properties -->
-		<jetty-plugin.version>9.2.2.v20140723</jetty-plugin.version>
+		<jetty-plugin.version>9.3.0.M2</jetty-plugin.version>
 		<local.server.port>8889</local.server.port> <!-- TODO: put this in a properties file, pom and Java should read from properties -->
 		<local.server.path>/spring_mvc_rest_demo</local.server.path>
 		<local.server.stop-port>8899</local.server.stop-port>
@@ -30,6 +30,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
 
@@ -58,10 +63,16 @@
 
 		<!-- used for serliazing/deserializing POJOs to/from JSON -->
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-base</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

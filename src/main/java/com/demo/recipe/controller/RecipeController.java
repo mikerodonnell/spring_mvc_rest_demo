@@ -2,7 +2,7 @@ package com.demo.recipe.controller;
 
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,6 +22,9 @@ import com.demo.recipe.service.RecipeService;
 @RequestMapping("/recipe/")
 public class RecipeController {	
 	
+	@Autowired
+	private RecipeService recipeService;
+	
 	/**
 	 * Retrieve a single Recipe by UUID. 
 	 * 
@@ -34,7 +37,7 @@ public class RecipeController {
 		Recipe recipe = null;
 		String errorMessage = null;
 		try {
-			recipe = RecipeService.getRecipe(recipeUuid);
+			recipe = recipeService.getRecipe(recipeUuid);
 		}
 		catch( RecipeLookupException recipeLookupException ) {
 			errorMessage = recipeLookupException.getMessage();
@@ -58,7 +61,7 @@ public class RecipeController {
 	@RequestMapping(value="/search/{ingredientName}", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<?> searchRecipesByIngredientName( @PathVariable("ingredientName") String ingredientName ) {
 		ResponseEntity<?> responseEntity = null;
-		Set<Recipe> recipes = RecipeService.searchRecipesByIngredientName(ingredientName);
+		Set<Recipe> recipes = recipeService.searchRecipesByIngredientName(ingredientName);
 		
 		responseEntity = new ResponseEntity< Set<Recipe> >(recipes, HttpStatus.OK);
 		
@@ -79,7 +82,7 @@ public class RecipeController {
 		String errorMessage = null;
 		
 		try {
-			recipe = RecipeService.createRecipe(recipeRepresentation);
+			recipe = recipeService.createRecipe(recipeRepresentation);
 		}
 		catch(RecipeCreationException recipeCreationException) {
 			errorMessage = recipeCreationException.getMessage();
@@ -109,7 +112,7 @@ public class RecipeController {
 		String errorMessage = null;
 		
 		try {
-			recipe = RecipeService.updateRecipe( recipeUuid, recipeRepresentation );
+			recipe = recipeService.updateRecipe( recipeUuid, recipeRepresentation );
 		}
 		catch(RecipeCreationException recipeCreationException) {
 			errorMessage = recipeCreationException.getMessage();

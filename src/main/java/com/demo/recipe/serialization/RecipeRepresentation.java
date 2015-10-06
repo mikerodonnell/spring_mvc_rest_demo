@@ -3,7 +3,7 @@ package com.demo.recipe.serialization;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.demo.recipe.model.Amount;
 import com.demo.recipe.model.Ingredient;

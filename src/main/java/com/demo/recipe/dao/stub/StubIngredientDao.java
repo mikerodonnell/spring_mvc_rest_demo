@@ -1,11 +1,15 @@
-package com.demo.recipe.stub.dao;
+package com.demo.recipe.dao.stub;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
+import com.demo.recipe.dao.IngredientDao;
 import com.demo.recipe.model.Ingredient;
 
-public class StubIngredientDao {
+@Repository
+public class StubIngredientDao implements IngredientDao {
 	
 	public static final Ingredient HAM = new Ingredient("ham");
 	public static final Ingredient EGGS = new Ingredient("eggs");
@@ -28,11 +32,13 @@ public class StubIngredientDao {
 	}
 	
 	
-	public static Set<Ingredient> getIngredients() {
+	@Override
+	public Set<Ingredient> getIngredients() {
 		return ALL_INGREDIENTS;
 	}
 	
-	public static Ingredient getIngredient( final String name ) {
+	@Override
+	public Ingredient getIngredient( final String name ) {
 		for( Ingredient ingredient : ALL_INGREDIENTS ) {
 			if( ingredient.getName().equalsIgnoreCase(name) )
 				return ingredient;
@@ -41,7 +47,8 @@ public class StubIngredientDao {
 		return null;
 	}
 	
-	public static Ingredient saveIngredient( final Ingredient newIngredient ) {
+	@Override
+	public Ingredient saveIngredient( final Ingredient newIngredient ) {
 		// just a stub ... real implementation would persist here
 		return newIngredient;
 	}
