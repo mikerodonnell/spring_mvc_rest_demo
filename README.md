@@ -1,5 +1,5 @@
 
-## A demo REST API service implemented with [Spring MVC](http://docs.spring.io/spring-framework/docs/current/spring-framework-reference/html/mvc.html) with automated [REST assured](https://github.com/jayway/rest-assured) integration tests..
+## A demo REST API service implemented with [Spring MVC](http://docs.spring.io/spring-framework/docs/current/spring-framework-reference/html/mvc.html) with automated [REST assured](https://github.com/jayway/rest-assured) integration tests.
 
 ### The use case is a recipe service for creating recipes and searching for recipes by ingredient.
 
@@ -44,5 +44,5 @@ search for recipes:
 ### usage:
  1. clone the spring_mvc_rest_demo repository
  2. from within the spring_mvc_rest_demo/ directory, run `mvn clean install` to run build and tests.
- 3. deploy the spring_mvc_rest_demo/target/spring_mvc_rest_demo.war.war file to any Java EE server container.
+ 3. deploy the spring_mvc_rest_demo/target/spring_mvc_rest_demo.war file to any Java EE server container.
  4. make API requests using cURL or any HTTP client tool as shown in the examples.
