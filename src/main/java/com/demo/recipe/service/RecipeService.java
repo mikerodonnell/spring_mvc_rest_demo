@@ -36,6 +36,9 @@ public class RecipeService {
 	 */
 	public Recipe createRecipe( final RecipeRepresentation recipeRepresentation ) {
 		
+		if( recipeRepresentation==null )
+			throw new RecipeCreationException("can't create recipe from null RecipeRepresentation");
+		
 		final String newRecipeName = recipeRepresentation.getRecipeName();
 		
 		if( newRecipeName==null || newRecipeName.isEmpty() )
@@ -50,7 +53,7 @@ public class RecipeService {
 		extractIngredients(recipe, recipeRepresentation);
 		
 		logger.info("saving new recipe now: " + recipe);
-		return recipeDao.saveRecipe(recipe); // TODO: cascade ingredients relationships ... not ingredients themselves...
+		return recipeDao.saveRecipe(recipe);
 	}
 
 	/**

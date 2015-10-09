@@ -85,7 +85,7 @@ public class StubRecipeDao implements RecipeDao {
 		if( ingredientName!=null && !ingredientName.isEmpty() ) {
 			for( Recipe recipe : ALL_RECIPES) {
 				for( Ingredient ingredient : recipe.getIngredients().keySet() ) {
-					if( ingredientName.toLowerCase().contains(ingredient.getName()) ) { // case sensitive for performance! TODO: do toLowerCase() on save!
+					if( ingredientName.toLowerCase().contains(ingredient.getName()) ) {
 						results.add( recipe );
 						break; // don't keep looping over the rest of the ingredients.
 					}

@@ -7,7 +7,6 @@ public class Ingredient {
 	
 	/** The unit of measurement comprising an amount of an ingredient. ex: "spoonfulls" 
 	 * @see Amount#getUnit()
-	 * @todo make this an enum that Ingredient and Amount use
 	 */
 	private String priceUnit;
 	
@@ -25,7 +24,7 @@ public class Ingredient {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = ((name==null) ? null : name.toLowerCase());
 	}
 
 	public String getPriceUnit() {

@@ -26,7 +26,7 @@ public class Recipe {
 	/** All ingredients to prepare this Recipe, represented as an Amount value for each Ingredient key. */
 	private Map<Ingredient, Amount> ingredients = new HashMap<Ingredient, Amount>();
 
-	// TODO: take away default constructor once verifying that's ok with DB saving
+	// a default constructor is generally needed by by an ORM like hibernate, leaving this in case we add a real DAO implementation later.
 	public Recipe() {}
 	
 	public Recipe(String recipeName) {
