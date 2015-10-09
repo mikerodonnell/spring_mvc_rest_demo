@@ -12,6 +12,7 @@
 		<jackson.version>2.6.2</jackson.version>
 		<junit.version>4.12</junit.version>
 		<log4j.version>1.2.17</log4j.version>
+		<org.json.version>20140107</org.json.version> <!-- this is the most recent version that's built in Java 1.7 -->
 		<rest.assured.version>2.5.0</rest.assured.version>
 
 		<!-- rest-assured on jetty properties -->
@@ -71,6 +72,12 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>${org.json.version}</version>
 		</dependency>
 
 	</dependencies>

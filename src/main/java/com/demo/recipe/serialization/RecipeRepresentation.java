@@ -3,8 +3,9 @@ package com.demo.recipe.serialization;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.json.JSONObject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.demo.recipe.model.Amount;
 import com.demo.recipe.model.Ingredient;
 import com.demo.recipe.model.Recipe;
@@ -176,5 +177,10 @@ public class RecipeRepresentation {
 	}
 	public void setAmount5(Integer amount5) {
 		this.amount5 = amount5;
+	}
+	
+	@Override
+	public String toString() {
+		return (new JSONObject(this)).toString();
 	}
 }
