@@ -1,19 +1,15 @@
 package com.demo.recipe.dao;
 
-import java.util.Set;
-
 import com.demo.recipe.model.Recipe;
 
+import java.util.Set;
+
 public interface RecipeDao {
+    Recipe getRecipeByUuid(String uuid);
 
-	public Set<Recipe> getRecipes();
+    Recipe getRecipeByName(String recipeName);
 
-	public Recipe getRecipeByUuid(String uuid);
+    Recipe saveRecipe(Recipe newRecipe);
 
-	public Recipe getRecipeByName(String recipeName);
-
-	public Recipe saveRecipe(Recipe newRecipe);
-	
-	public Set<Recipe> searchRecipesByIngredientName(String ingredientName);
-
+    Set<Recipe> searchRecipesByIngredientName(String ingredientName);
 }

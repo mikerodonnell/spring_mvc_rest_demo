@@ -1,15 +1,9 @@
 package com.demo.recipe.dao;
 
-import java.util.Set;
-
 import com.demo.recipe.model.Ingredient;
 
 public interface IngredientDao {
+    Ingredient getIngredient(String name);
 
-	public Set<Ingredient> getIngredients();
-
-	public Ingredient getIngredient(String name);
-
-	public Ingredient saveIngredient(Ingredient newIngredient);
-
+    Ingredient saveIngredient(Ingredient newIngredient);
 }
