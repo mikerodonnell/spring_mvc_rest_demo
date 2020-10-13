@@ -10,7 +10,7 @@
     <properties>
         <jackson.version>2.10.3</jackson.version>
         <jetty-plugin.version>9.4.28.v20200408</jetty-plugin.version>
-        <junit.version>4.13</junit.version>
+        <junit.version>4.13.1</junit.version>
         <local.server.port>8889</local.server.port>
         <local.server.path>/spring_mvc_rest_demo</local.server.path>
         <local.server.stop-port>8899</local.server.stop-port>
